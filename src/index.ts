@@ -8,13 +8,14 @@ import { TYPES } from "./Types";
 
 const container = new Container();
 
-container.bind(Logger).toSelf();
+container.bind(TYPES.Logger).to(Logger);
+container.bind(TYPES.StoreFactory).toConstantValue(new StoreFactory(container));
 
 container
     .bind(TYPES.ChildStore)
     .toFactory(
         () =>
-            (modelStoreFactory) => new ChildStore(modelStoreFactory));
+            () => new ChildStore());
 
 const storeFactory = new StoreFactory(container);
 
