@@ -1,27 +1,23 @@
 import { Container } from "inversify";
 import "reflect-metadata";
 
+import { ChildStore } from "./ChildStore";
 import { Logger } from "./Logger";
-import { ModelStore } from "./ModelStore";
-import { IModelStoreCreator, ModelStoreFactory } from "./ModelStoreFactory";
-import { AppleStore } from "./Stores/AppleStore";
-import { IAppleModel, ModelType } from "./Stores/Models";
+import { StoreFactory } from "./StoreFactory";
+import { TYPES } from "./Types";
 
 const container = new Container();
 
 container.bind(Logger).toSelf();
 
 container
-    .bind<IModelStoreCreator>(ModelType.Apple)
-    .toFactory<ModelStore>(
+    .bind(TYPES.ChildStore)
+    .toFactory(
         () =>
-            (model: IAppleModel, modelStoreFactory) => new AppleStore(model, modelStoreFactory));
+            (modelStoreFactory) => new ChildStore(modelStoreFactory));
 
-const modelStoreFactory = new ModelStoreFactory(container, [AppleStore]);
+const storeFactory = new StoreFactory(container);
 
-const appleStore = modelStoreFactory.create<IAppleModel, AppleStore>({
-    type: ModelType.Apple
-});
+const childStore = storeFactory.create();
 
-// appleStore.logger will be undefined here :(
-appleStore.onClick();
+childStore.logger.log("Why am I undefined?");
