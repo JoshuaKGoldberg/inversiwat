@@ -1,0 +1,17 @@
+{
+  "name": "inversiwat",
+  "version": "1.0.0",
+  "description": "Help please!",
+  "main": "index.js",
+  "dependencies": {
+    "inversify": "^4.3.0",
+    "reflect-metadata": "^0.1.10",
+    "typescript": "^2.5.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node lib/index.js"
+  },
+  "author": "Josh Goldberg <joshuakgoldberg@outlook.com>",
+  "license": "MIT"
+}
