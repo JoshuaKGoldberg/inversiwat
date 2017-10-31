@@ -9,6 +9,6 @@ export class StoreFactory {
     ) { }
 
     public create(): ChildStore {
-        return this.container.get<() => ChildStore>(TYPES.ChildStore)();
+        return this.container.get<() => ChildStore>(TYPES.ChildStoreFactory)();
     }
 }
